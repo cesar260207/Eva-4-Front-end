@@ -16,9 +16,10 @@ function UserLayout() {
       <SiteHeader
         links={[
           { to: "/", label: "Inicio" },
+          { to: "/user/dashboard", label: "Dashboard" },
           { to: "/perfil", label: "Mi perfil" },
-          { to: "/user/classes", label: "Clases" },         
-          { to: "/user/reservations", label: "Reservas" },  
+          { to: "/user/classes", label: "Clases" },
+          { to: "/user/reservations", label: "Reservas" },
           { to: "#", label: "Mi Progreso", external: true },
         ]}
         showLogout

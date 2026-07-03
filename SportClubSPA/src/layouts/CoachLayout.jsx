@@ -16,10 +16,11 @@ function CoachLayout() {
       <SiteHeader
         links={[
           { to: "/", label: "Inicio" },
+          { to: "/coach/dashboard", label: "Dashboard" },
           { to: "/perfil", label: "Mi perfil" },
           { to: "#", label: "Mis Alumnos", external: true },
-          { to: "/coach/my-classes", label: "Mis Clases" },   
-          { to: "/coach/my-schedule", label: "Mi Horario" },  
+          { to: "/coach/my-classes", label: "Mis Clases" },
+          { to: "/coach/my-schedule", label: "Mi Horario" },
           { to: "#", label: "Reportes", external: true },
         ]}
         showLogout
