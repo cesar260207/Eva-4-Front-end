@@ -110,9 +110,18 @@ function ClassScheduleFormModal({ show, handleClose, onSuccess, selected }) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Día de la semana</Form.Label>
-            <Form.Control type="text" value={formData.day_of_week} onChange={(e) => setFormData({...formData, day_of_week: e.target.value})} />
-          </Form.Group>
+             <Form.Label>Día de la semana</Form.Label>
+              <Form.Select required value={formData.day_of_week} onChange={(e) => setFormData({...formData, day_of_week: e.target.value})}>
+             <option value="">Seleccione...</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="7">Domingo</option>
+      </Form.Select>
+    </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Hora Inicio</Form.Label>
