@@ -1,8 +1,25 @@
+import { useEffect, useState } from "react"
 import { getDisplayName, getUser } from "../../services/authService"
+import { getMyClasses, getMySchedules } from "../../services/coachService"
 
 function CoachDashboard() {
   const user = getUser()
   const displayName = getDisplayName(user)
+  const [classes, setClasses] = useState([])
+  const [schedules, setSchedules] = useState([])
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [cls, sch] = await Promise.all([getMyClasses(), getMySchedules()])
+        setClasses(Array.isArray(cls.data) ? cls.data : [])
+        setSchedules(Array.isArray(sch.data) ? sch.data : [])
+      } catch {
+        console.error("Error cargando datos del coach")
+      }
+    }
+    load()
+  }, [])
 
   return (
     <>
@@ -13,17 +30,29 @@ function CoachDashboard() {
 
       <section className="dashboard-panel">
         <div className="panel">
-          <h3>Mis alumnos</h3>
-          <p>Alumno 1 - Email</p>
-          <p>Alumno 2 - Email</p>
-          <p>Alumno 3 - Email</p>
+          <h3>Mis Clases</h3>
+          {classes.length === 0 ? (
+            <p>No tienes clases asignadas</p>
+          ) : (
+            classes.map(item => (
+              <p key={item.id}>
+                {item.sport?.name ?? "—"} - {item.room?.name ?? "—"}
+              </p>
+            ))
+          )}
         </div>
 
         <div className="panel">
           <h3>Mi Horario</h3>
-          <p>Lunes - Spinning 18:00</p>
-          <p>Miércoles - Boxeo 11:00</p>
-          <p>Viernes - CrossFit 10:00</p>
+          {schedules.length === 0 ? (
+            <p>No tienes horarios asignados</p>
+          ) : (
+            schedules.map(item => (
+              <p key={item.id} className="text-capitalize">
+                {item.day_of_week ?? "—"} - {item.sportRoom?.sport?.name ?? item.sport?.name ?? "—"} {item.start_time}
+              </p>
+            ))
+          )}
         </div>
 
         <div className="panel">
